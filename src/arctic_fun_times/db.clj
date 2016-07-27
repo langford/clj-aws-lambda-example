@@ -47,6 +47,7 @@
 (defn main-list-fetch
   "gives back a list of people attending"
   [& rs]
+  (setup)
   (let [result (far/scan client-opts :Events)]
     (println result)
     result))
@@ -54,6 +55,7 @@
 (defn add-to-list
   "adds a person to the list of attendees"
   [name event]
+  (setup)
   (far/put-item client-opts ;how to connect to the database
                 :Events     ;the table
                 {:name name
