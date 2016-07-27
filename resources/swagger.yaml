@@ -1,0 +1,105 @@
+---
+swagger: "2.0"
+info:
+  version: "2016-07-27T15:15:22Z"
+  title: "arctic-fun-times-api"
+host: "cqezdcjn17.execute-api.us-east-1.amazonaws.com"
+basePath: "/Production"
+schemes:
+- "https"
+paths:
+  /:
+    get:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+        500:
+          description: "500 response"
+        404:
+          description: "404 response"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+          .*"status":404.*:
+            statusCode: "404"
+          .+:
+            statusCode: "500"
+        requestTemplates:
+          application/json: " {\n   \"stage\" : \"$context.stage\",\n   \"request-id\"\
+            \ : \"$context.requestId\",\n   \"api-id\" : \"$context.apiId\",\n   \"\
+            resource-path\" : \"$context.resourcePath\",\n   \"resource-id\" : \"\
+            $context.resourceId\",\n   \"path\": {\n     #foreach($path in $input.params().path.keySet())\n\
+            \       \"$path\": \"$util.escapeJavaScript($input.params().path.get($path))\"\
+            \ #if($foreach.hasNext),\n       #end\n     #end\n   },\n   \"http-method\"\
+            \ : \"$context.httpMethod\",\n   \"source-ip\" : \"$context.identity.sourceIp\"\
+            ,\n   \"user-agent\" : \"$context.identity.userAgent\",\n   \"account-id\"\
+            \ : \"$context.identity.accountId\",\n   \"api-key\" : \"$context.identity.apiKey\"\
+            ,\n   \"caller\" : \"$context.identity.caller\",\n   \"user\" : \"$context.identity.user\"\
+            ,\n   \"user-arn\" : \"$context.identity.userArn\",\n   \"query-string\"\
+            : {\n      #foreach($querystring in $input.params().querystring.keySet())\n\
+            \        \"$querystring\": \"$util.escapeJavaScript($input.params().querystring.get($querystring))\"\
+            \ #if($foreach.hasNext),#end\n      #end\n   },\n   \"headers\": {\n \
+            \     #foreach($header in $input.params().header.keySet())\n        \"\
+            $header\": \"$util.escapeJavaScript($input.params().header.get($header))\"\
+            \ #if($foreach.hasNext),#end\n      #end\n   },\n   \"body\" : $input.json('$')\n\
+            }"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:211772610051:function:backendProduction/invocations"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws"
+    post:
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+        500:
+          description: "500 response"
+        404:
+          description: "404 response"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+          .*"status":404.*:
+            statusCode: "404"
+          .+:
+            statusCode: "500"
+        requestTemplates:
+          application/json: " {\n   \"stage\" : \"$context.stage\",\n   \"request-id\"\
+            \ : \"$context.requestId\",\n   \"api-id\" : \"$context.apiId\",\n   \"\
+            resource-path\" : \"$context.resourcePath\",\n   \"resource-id\" : \"\
+            $context.resourceId\",\n   \"path\": {\n     #foreach($path in $input.params().path.keySet())\n\
+            \       \"$path\": \"$util.escapeJavaScript($input.params().path.get($path))\"\
+            \ #if($foreach.hasNext),\n       #end\n     #end\n   },\n   \"http-method\"\
+            \ : \"$context.httpMethod\",\n   \"source-ip\" : \"$context.identity.sourceIp\"\
+            ,\n   \"user-agent\" : \"$context.identity.userAgent\",\n   \"account-id\"\
+            \ : \"$context.identity.accountId\",\n   \"api-key\" : \"$context.identity.apiKey\"\
+            ,\n   \"caller\" : \"$context.identity.caller\",\n   \"user\" : \"$context.identity.user\"\
+            ,\n   \"user-arn\" : \"$context.identity.userArn\",\n   \"query-string\"\
+            : {\n      #foreach($querystring in $input.params().querystring.keySet())\n\
+            \        \"$querystring\": \"$util.escapeJavaScript($input.params().querystring.get($querystring))\"\
+            \ #if($foreach.hasNext),#end\n      #end\n   },\n   \"headers\": {\n \
+            \     #foreach($header in $input.params().header.keySet())\n        \"\
+            $header\": \"$util.escapeJavaScript($input.params().header.get($header))\"\
+            \ #if($foreach.hasNext),#end\n      #end\n   },\n   \"body\" : $input.json('$')\n\
+            }"
+        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:211772610051:function:backendProduction/invocations"
+        passthroughBehavior: "when_no_templates"
+        httpMethod: "POST"
+        type: "aws"
+definitions:
+  Empty:
+    type: "object"
+
