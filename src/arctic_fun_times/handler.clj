@@ -20,8 +20,6 @@
   "This is a list of all the event attendees"
   []
   (r/response (db/main-list-fetch)))
-  (r/response {:people "p" :name "b" :event "e"}) 
-
 
 (defn handle-add-to-list
   "This adds a new attendee to the list"
