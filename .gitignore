@@ -1,0 +1,6 @@
+*.swp
+target/*
+*.swo
+profiles.clj
+.lein*
+localDynamoDB/data/
